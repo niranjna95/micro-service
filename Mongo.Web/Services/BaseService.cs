@@ -10,11 +10,13 @@ namespace Mongo.Web.Services
     public class BaseService:IBaseService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public BaseService(IHttpClientFactory httpClientFactory)
+        private readonly ITokenProvider tokenProvider;
+        public BaseService(IHttpClientFactory httpClientFactory, ITokenProvider tokenProvider)
         {
             _httpClientFactory = httpClientFactory;
+            this.tokenProvider = tokenProvider;
         }
-        public async Task<ResponseDto?> SendAsync(RequestDto requestDto)
+        public async Task<ResponseDto?> SendAsync(RequestDto requestDto, bool withBearer = true)
         {
             try
             {
@@ -22,6 +24,11 @@ namespace Mongo.Web.Services
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
                 //token
+                if (withBearer)
+                {
+                    var token = tokenProvider.GetToken();
+                    message.Headers.Add("Authorization", $"Bearer {token}");
+                }
                 message.RequestUri = new Uri(requestDto.Url);
                 if (requestDto.Data != null)
                 {
