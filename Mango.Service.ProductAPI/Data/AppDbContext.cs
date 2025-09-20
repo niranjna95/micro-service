@@ -1,4 +1,5 @@
 ﻿using Mango.Service.ProductAPI.Models;
+using Mango.Service.ProductAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -9,12 +10,12 @@ namespace Mongo.Services.ProductAPI.Data
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
         }
-        public DbSet<ProductModel> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ProductModel>().HasData(new ProductModel
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 1,
                 Name = "Samosa",
@@ -23,7 +24,7 @@ namespace Mongo.Services.ProductAPI.Data
                 ImageUrl = "https://placehold.co/603x403",
                 CategoryName = "Appetizer"
             });
-            modelBuilder.Entity<ProductModel>().HasData(new ProductModel
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 2,
                 Name = "Paneer Tikka",
@@ -32,7 +33,7 @@ namespace Mongo.Services.ProductAPI.Data
                 ImageUrl = "https://placehold.co/602x402",
                 CategoryName = "Appetizer"
             });
-            modelBuilder.Entity<ProductModel>().HasData(new ProductModel
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 3,
                 Name = "Sweet Pie",
@@ -41,7 +42,7 @@ namespace Mongo.Services.ProductAPI.Data
                 ImageUrl = "https://placehold.co/601x401",
                 CategoryName = "Dessert"
             });
-            modelBuilder.Entity<ProductModel>().HasData(new ProductModel
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 4,
                 Name = "Pav Bhaji",
