@@ -20,7 +20,7 @@ namespace Mongo.Web.Services
                 ApiType = ApiType.POST,
                 Data = model,
                 Url = SD.AuthAPIBase + "/api/auth/AssignRole"
-            });
+            }, withBearer:false);
         }
 
         public async Task<ResponseDto?> LoginAsync(LoginRequestModel model)
@@ -30,7 +30,7 @@ namespace Mongo.Web.Services
                 ApiType = ApiType.POST,
                 Data = model,
                 Url = SD.AuthAPIBase + "/api/auth/Login"
-            });
+            }, withBearer: false);
         }
 
         public async Task<ResponseDto?> RegisterAsync(RegisterationRequestModel model)
@@ -40,7 +40,7 @@ namespace Mongo.Web.Services
                 ApiType = ApiType.POST,
                 Data = model,
                 Url = SD.AuthAPIBase + "/api/auth/Register"
-            });
+            }, withBearer: false);
         }
     }
 }
